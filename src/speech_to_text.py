@@ -13,7 +13,7 @@ class speechToText:
         self.headers = {'authorization': ASSEMBLY_AI_API_KEY}
     
     # Read wav file
-    def _read_file(self, filename, chunk_size=5242880):
+    def _read_file(self, filename: str, chunk_size=5242880) -> bytes:
 
         with open(filename, 'rb') as _file:
             while True:
@@ -47,7 +47,7 @@ class speechToText:
         return transcription_job_id
 
     # 3. GET TRANSCRIPTION
-    def get_transcription(self, transcription_job_id):
+    def get_transcription(self, transcription_job_id: str) -> str:
         
         url = speechToText.TRANSCRIPTION_JOB_ENDPOINT+transcription_job_id
         while True:
