@@ -4,6 +4,9 @@ import pyaudio
 import wave
 import os
 import datetime
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 # RECORD AUDIO
 FRAMES_PER_BUFFER = 3200
@@ -29,7 +32,8 @@ def record_mic(record_duration):
     # Duration of recording
     seconds = record_duration
 
-    print("Started recording...")
+    logging.info(f"Question prompt will be recorded for {record_duration} seconds")
+    logging.info("Started recording...")
 
     # Frames is composed of buffers. With each iteration we record each buffer and append it to `frames` list.
     for i in range(int(FRAME_RATE/FRAMES_PER_BUFFER*seconds)):
@@ -40,7 +44,7 @@ def record_mic(record_duration):
     stream.close()
     p.terminate()
 
-    print("Ended recording")
+    logging.info("Ended recording")
 
     # SAVE AUDIO AS WAVE FILE
     current_timestamp = str(datetime.datetime.now())
@@ -55,6 +59,12 @@ def record_mic(record_duration):
     # Join all buffers/data chunks in frames list in binary format
     obj.writeframes(b"".join(frames))
     obj.close()
-    print(f"Saved recording at {save_path}")
+    logging.info(f"Saved recording at {save_path}")
 
     return save_path
+
+def main():
+    record_mic(4)
+
+if __name__ == "__main__":
+    main()
