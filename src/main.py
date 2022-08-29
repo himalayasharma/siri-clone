@@ -11,6 +11,8 @@ def main():
     audio_url = obj.upload_audio(audio_file_path)
     # 3. SUBMIT UPLOADED FILE FOR TRANSCRIPTION
     transcription_job_id = obj.submit_for_transcription(audio_url=audio_url)
+    # 4. GET TRANSCRIPTION
+    transcript = obj.get_transcription(transcription_job_id=transcription_job_id)
 
 
 if __name__ == "__main__":
