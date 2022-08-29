@@ -16,10 +16,14 @@ def main():
     transcription_job_id = obj.submit_for_transcription(audio_url=audio_url)
     # 4. GET TRANSCRIPTION
     question = obj.get_transcription(transcription_job_id=transcription_job_id)
+    print(40*"*")
     print(f"ME: {question}")
+    print(40*"*")
     # 5. SUBMIT QUESTION TO OPEN AI AND GET RESPONSE
     answer = get_answer(question=question)
+    print(40*"*")
     print(f"JARVIS: {answer}")
+    print(40*"*")
 
 if __name__ == "__main__":
     main()
