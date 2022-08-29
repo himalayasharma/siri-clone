@@ -1,12 +1,15 @@
 import requests
 from api_secrets import ASSEMBLY_AI_API_KEY
+import time
 
 class speechToText:
 
     UPLOAD_ENDPOINT = "https://api.assemblyai.com/v2/upload"
+    TRANSCRIPTION_ENDPOINT = "https://api.assemblyai.com/v2/transcript"
 
     def __init__(self):
-        pass
+        # Specify API key in header for authentication
+        self.headers = {'authorization': ASSEMBLY_AI_API_KEY}
     
     # Read wav file
     def _read_file(self, filename, chunk_size=5242880):
@@ -18,17 +21,29 @@ class speechToText:
                     break
                 yield data
 
-    # UPLOAD LOCAL AUDIO TO ASSEMBLY AI
-    def upload_audio(self, audio_file_path: str):
+    # UPLOAD LOCAL AUDIO
+    def upload_audio(self, audio_file_path: str) -> dict:
 
-        # Specify API key in header for authentication
-        headers = {'authorization': ASSEMBLY_AI_API_KEY}
         # Send POST request
         response = requests.post(url=speechToText.UPLOAD_ENDPOINT,
-                                headers=headers,
+                                headers=self.headers,
                                 data=self._read_file(filename=audio_file_path))
         # Return response in json format
-        return response.json()
+        json_response = response.json()
+        # Get uploaded audio url
+        audio_url =json_response["upload_url"]
+        return audio_url
+
+    # SUBMIT UPLOADED AUDIO FILE FOR TRANSCRIPTION
+    def submit_for_transcription(self, audio_url: str) -> dict:
+
+        json = {"audio_url": audio_url}
+        response = requests.post(url=speechToText.TRANSCRIPTION_ENDPOINT,
+                                headers=self.headers,
+                                json=json)
+        json_response = response.json()
+        transcription_job_id = json_response["id"]
+        return transcription_job_id
 
 def main():
     pass
