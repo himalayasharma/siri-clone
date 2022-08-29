@@ -2,12 +2,15 @@
 import pyaudio
 # Used to save the recorded audio
 import wave
+import os
+import datetime
 
 # RECORD AUDIO
 FRAMES_PER_BUFFER = 3200
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 FRAME_RATE = 16000
+SAVE_PATH = "data/audio-recording"
 
 p = pyaudio.PyAudio()
 
@@ -38,7 +41,9 @@ p.terminate()
 print("Ended recording")
 
 # SAVE AUDIO AS WAVE FILE
-save_path = "data/experimental/recording.wav"
+current_timestamp = str(datetime.datetime.now())
+current_timestamp = "-".join(current_timestamp.split())
+save_path = os.path.join(SAVE_PATH, f"{current_timestamp}"+"-recording.wav")
 obj = wave.open(save_path, "wb")
 obj.setnchannels(1)
 obj.setsampwidth(p.get_sample_size(FORMAT))
