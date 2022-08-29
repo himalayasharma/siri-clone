@@ -88,5 +88,6 @@ target/
 # Mypy cache
 .mypy_cache/
 
-# My scripts
+# Avoid API keys
+src/api_secrets.py
 
