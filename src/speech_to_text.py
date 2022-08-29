@@ -54,12 +54,13 @@ class speechToText:
             response = requests.get(url=url, headers=self.headers)
             json_response = response.json()
             if json_response["status"] == "queued":
-                print("Transcription job is queued...")
+                # print("Transcription job is queued...")
                 continue
             elif json_response["status"] == "processing":
-                print("Transcription job is running...")
-                print("Waiting for 3 seconds...")
-                time.sleep(2)
+                # print("Transcription job is running...")
+                # print("Waiting for 3 seconds...")
+                # time.sleep(2)
+                continue
             else:
                 return json_response["text"]
 
