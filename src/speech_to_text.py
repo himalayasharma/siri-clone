@@ -1,6 +1,9 @@
 import requests
 from api_secrets import ASSEMBLY_AI_API_KEY
 import time
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 class speechToText:
 
@@ -26,6 +29,7 @@ class speechToText:
     def upload_audio(self, audio_file_path: str) -> dict:
 
         # Send POST request
+        logging.info(f"Upload recorded audio to Assembly AI API")
         response = requests.post(url=speechToText.UPLOAD_ENDPOINT,
                                 headers=self.headers,
                                 data=self._read_file(filename=audio_file_path))
@@ -33,6 +37,7 @@ class speechToText:
         json_response = response.json()
         # Get uploaded audio url
         audio_url =json_response["upload_url"]
+        logging.info(f"Fetched corresponding audio URL")
         return audio_url
 
     # 2. SUBMIT UPLOADED AUDIO FILE FOR TRANSCRIPTION
@@ -42,26 +47,30 @@ class speechToText:
         response = requests.post(url=speechToText.TRANSCRIPTION_ENDPOINT,
                                 headers=self.headers,
                                 json=json)
+        logging.info(f"Submit audio URL to Assembly AI API to initiate transcription job")
         json_response = response.json()
         transcription_job_id = json_response["id"]
+        logging.info(f"Fetched transcription job ID")
         return transcription_job_id
 
     # 3. GET TRANSCRIPTION
     def get_transcription(self, transcription_job_id: str) -> str:
         
         url = speechToText.TRANSCRIPTION_JOB_ENDPOINT+transcription_job_id
+        logging.info(f"Poll Assembly AI API to get check transcription job status")
         while True:
             response = requests.get(url=url, headers=self.headers)
             json_response = response.json()
             if json_response["status"] == "queued":
-                # print("Transcription job is queued...")
+                logging.info("Transcription job is queued...")
                 continue
             elif json_response["status"] == "processing":
-                # print("Transcription job is running...")
-                # print("Waiting for 3 seconds...")
-                # time.sleep(2)
+                logging.info("Transcription job is running...")
+                logging.info("Waiting for 2 seconds...")
+                time.sleep(2)
                 continue
             else:
+                logging.info(f"Transcription job complete")
                 return json_response["text"]
 
 def main():
