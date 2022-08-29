@@ -15,9 +15,6 @@ An AI-powered virtual assistant that can answer your questions just about anythi
 Project Organization
 ------------
 
-Project Organization
-------------
-
     ├── LICENSE
     ├── Makefile                  <- Makefile with commands like `make environment` or `make requirements`
     ├── README.md                 <- The top-level README for developers using this project
