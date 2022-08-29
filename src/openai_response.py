@@ -12,7 +12,8 @@ def get_answer(question: str) -> str:
         max_tokens=100,
         )
 
-    return response["choices"][0]["text"]
+    text_response = response['choices'][0]['text'].strip()
+    return text_response
 
 def main():
     pass
