@@ -10,7 +10,7 @@
 
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/himalayasharma/jarvis-lite?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/himalayasharma/jarvis-lite?style=social"> <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himalayasharma/jarvis-lite"> <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/himalayasharma/jarvis-lite">
 
-An AI-powered virtual assistant that answer your questions just about anything.
+An AI-powered virtual assistant that can answer your questions just about anything.
 
 Project Organization
 ------------
