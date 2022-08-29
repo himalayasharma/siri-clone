@@ -12,7 +12,7 @@ CHANNELS = 1
 FRAME_RATE = 16000
 SAVE_PATH = "data/audio-recording"
 
-def record_mic():
+def record_mic(record_duration):
 
     p = pyaudio.PyAudio()
 
@@ -27,7 +27,7 @@ def record_mic():
     # Recorded frames
     frames = []
     # Duration of recording
-    seconds = 3
+    seconds = record_duration
 
     print("Started recording...")
 
