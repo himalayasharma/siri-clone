@@ -5,6 +5,7 @@ from openai_response import get_answer
 RECORD_DURATION=4
 
 def main():
+    print("NOTE: Your question will be recorded for 4 seconds.")
     while True:
         # 1. RECORD AND SAVE AUDIO
         audio_file_path = record_mic(record_duration=RECORD_DURATION)
@@ -19,10 +20,8 @@ def main():
         question = obj.get_transcription(transcription_job_id=transcription_job_id)
         print(40*"*")
         print(f"ME: {question}")
-        print(40*"*")
         # 5. SUBMIT QUESTION TO OPEN AI AND GET RESPONSE
         answer = get_answer(question=question)
-        print(40*"*")
         print(f"JARVIS: {answer}")
         print(40*"*")
 
