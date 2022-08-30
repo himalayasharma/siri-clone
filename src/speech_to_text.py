@@ -71,7 +71,7 @@ class speechToText:
             elif json_response["status"] == "processing":
                 logging.info("Transcription job is running...")
                 logging.info("Waiting for 2 seconds...")
-
+                print(f"Running transcription job...", end='\r')
                 time.sleep(2)
                 continue
             else:
