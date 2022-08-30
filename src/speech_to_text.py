@@ -3,8 +3,12 @@ from api_secrets import ASSEMBLY_AI_API_KEY
 import time
 import logging
 
-logging.basicConfig(level=logging.INFO)
-
+logging.basicConfig(filename='data/logs/conversation.log',
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
+                    
 class speechToText:
 
     UPLOAD_ENDPOINT = "https://api.assemblyai.com/v2/upload"
@@ -67,6 +71,7 @@ class speechToText:
             elif json_response["status"] == "processing":
                 logging.info("Transcription job is running...")
                 logging.info("Waiting for 2 seconds...")
+
                 time.sleep(2)
                 continue
             else:

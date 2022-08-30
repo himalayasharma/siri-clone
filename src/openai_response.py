@@ -3,8 +3,12 @@ import os
 from api_secrets import OPEN_AI_API_KEY
 import logging
 
-logging.basicConfig(level=logging.INFO)
 openai.api_key = OPEN_AI_API_KEY
+logging.basicConfig(filename='data/logs/conversation.log',
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
 
 def get_answer(question: str) -> str:
 

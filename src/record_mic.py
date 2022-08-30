@@ -6,7 +6,11 @@ import os
 import datetime
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(filename='data/logs/conversation.log',
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
 
 # RECORD AUDIO
 FRAMES_PER_BUFFER = 3200
@@ -34,6 +38,8 @@ def record_mic(record_duration):
 
     logging.info(f"Question prompt will be recorded for {record_duration} seconds")
     logging.info("Started recording...")
+
+
 
     # Frames is composed of buffers. With each iteration we record each buffer and append it to `frames` list.
     for i in range(int(FRAME_RATE/FRAMES_PER_BUFFER*seconds)):
