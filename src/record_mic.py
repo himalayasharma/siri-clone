@@ -6,6 +6,11 @@ import os
 import datetime
 import logging
 import time
+from ctypes import *
+
+ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
+def py_error_handler(filename, line, function, err, fmt):
+  return None
 
 logging.basicConfig(filename='data/logs/conversation.log',
                     filemode='a',
@@ -22,15 +27,19 @@ SAVE_PATH = "data/audio-recording"
 
 def record_mic(record_duration):
 
+    c_error_handler = ERROR_HANDLER_FUNC(py_error_handler)
+    asound = cdll.LoadLibrary('libasound.so')
+    # Set error handler
+    asound.snd_lib_error_set_handler(c_error_handler)
+
     logging.info(f"Question prompt will be recorded for {record_duration} seconds")
 
     # Print to console
-    print("NOTE: Your question will be recorded for 4 seconds.")
     time.sleep(1)
     for t in range(0,3):
         print(f"Recording starting in {3-t} seconds...", end='\r')
         time.sleep(1)
-    print("\nGo!\n", end='\r')
+    print("\nGo!", end='\r')
 
     p = pyaudio.PyAudio()
 
@@ -50,9 +59,13 @@ def record_mic(record_duration):
     logging.info("Started recording...")
 
     # Frames is composed of buffers. With each iteration we record each buffer and append it to `frames` list.
+    print("Recording is ON. Start asking!")
     for i in range(int(FRAME_RATE/FRAMES_PER_BUFFER*seconds)):
         data_chunk = stream.read(FRAMES_PER_BUFFER)
         frames.append(data_chunk)
+        if((i+1)%5 == 0):
+            t_elapsed = (i+1)/5
+            print(f"{4-t_elapsed} seconds left!", end='\r')
 
     stream.stop_stream()
     stream.close()
@@ -74,6 +87,7 @@ def record_mic(record_duration):
     obj.writeframes(b"".join(frames))
     obj.close()
     logging.info(f"Saved recording at {save_path}")
+    print("\nSuccessfully saved audio recording!")
 
     return save_path
 
