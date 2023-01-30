@@ -2,10 +2,10 @@
 <br />
 <div align="center">
   <a>
-    <img src="readme-assets/jarvis-lite.png" alt="Logo">
+    <img src="readme-assets/DALL·E-siri-logo.png" width="224" height="224" alt="Logo">
   </a>
 
-  <h1 align="center">Jarvis Lite</h1>
+  <h1 align="center"><img src="readme-assets/microphone-recording-lineal.gif" width="35px"> Siri Clone</h1>
 </div>
 
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/himalayasharma/jarvis-lite?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/himalayasharma/jarvis-lite?style=social"> <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himalayasharma/jarvis-lite"> <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/himalayasharma/jarvis-lite">
