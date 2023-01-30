@@ -53,7 +53,7 @@ Setup
 ------------
 1. Clone the repo
 	```
-	git clone https://github.com/himalayasharma/jarvis-lite.git
+	git clone https://github.com/himalayasharma/siri-clone.git
 	```
 2. Traverse into project directory.
 3. Create virtual environment.
