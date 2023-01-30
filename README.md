@@ -10,7 +10,7 @@
 
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/himalayasharma/jarvis-lite?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/himalayasharma/jarvis-lite?style=social"> <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himalayasharma/jarvis-lite"> <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/himalayasharma/jarvis-lite">
 
-An AI-powered Q/A bot that can answer your questions just about anything.
+The project involved recording 4-second monophonic audio clips in wav format, containing questions. These audio clips were then transcribed into text using AssemblyAI's API. The next step was to utilize OpenAI's API, which had a GPT-3 backend (Davinci variant), to generate answers. The length of the answers was capped at 100 tokens to ensure conciseness and clarity. The objective was to utilize cutting-edge technology to efficiently transcribe audio into text and generate concise answers to questions.
 
 Project Organization
 ------------
